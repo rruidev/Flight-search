@@ -1,0 +1,60 @@
+<div class="search-page">
+
+  <form [formGroup]="searchForm">
+    <div class="form-group">
+      <label class="center-block">Flight Number:
+        <input class="form-control" type="number" formControlName="flightNumber">
+      </label>
+    </div>
+
+    <div class="form-group">
+      <label class="center-block">Origin:
+        <input class="form-control" formControlName="origin">
+      </label>
+    </div>
+
+    <div class="form-group">
+      <label class="center-block">Destination:
+        <input class="form-control" formControlName="destination">
+      </label>
+    </div>
+
+    <div class="form-group">
+      <label class="center-block">Date:
+        <input class="form-control" formControlName="date">
+      </label>
+    </div>
+
+    <div>
+      <button [disabled]="!isFormValid" (click)="searchForFlights()"> Search </button>
+    </div>
+  </form>
+
+  <div class="error" *ngIf="errorMsg">{{errorMsg}}</div>
+
+
+  <div class="results" *ngIf="searchResults.length>1">
+    <table>
+    <tr>
+      <th>Flight Number</th>
+      <th>Carrier</th>
+      <th>Origin</th>
+      <th>Departure</th>
+      <th>Destination</th>
+      <th>Arrival</th>
+      <th>Aircraft</th>
+      <th>Distance</th>
+    </tr>
+    <tr *ngFor="let result of searchResults">
+      <td>{{ result?.flightNumber }}</td>
+      <td>{{ result?.carrier }}</td>
+      <td>{{ result?.origin }}</td>
+      <td>{{ result?.departure | date: 'short'}}</td>
+      <td>{{ result?.destination }}</td>
+      <td>{{ result?.arrival | date: 'short'}}</td>
+      <td>{{ result?.aircraft }}</td>
+      <td>{{ result?.distance }}</td>
+    </tr>
+  </table>
+  </div>
+</div>
